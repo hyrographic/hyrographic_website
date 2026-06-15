@@ -2603,7 +2603,7 @@ input, select, textarea {
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		postiion: relative;
+		position: relative;
 		margin: -2.5em 0 0 -2.5em;
 	}
 
@@ -2774,10 +2774,10 @@ input, select, textarea {
 				right: 0;
 				width: 100%;
 				height: auto;
-				transform: translateY(15%) translateX(20%) rotate(-20deg) scale(1);
+				transform: translateY(15%) translateX(15%) rotate(0deg) scale(1.2);
 				-webkit-transition: -webkit-transform 0.5s ease;
 				transition: transform 0.5s ease;
-				opacity: 0.95;
+				opacity: 1;
 				z-index: -1;
 				pointer-events: none;
 			}
@@ -2829,7 +2829,7 @@ input, select, textarea {
 			}
 
 			body:not(.is-touch) .tiles article:hover > a img.title-background {
-				transform: translateY(15%) translateX(20%) rotate(-20deg) scale(1.1);
+				transform: translateY(15%) translateX(20%) rotate(0deg) scale(1.4);
 			}
 
 		* + .tiles {
