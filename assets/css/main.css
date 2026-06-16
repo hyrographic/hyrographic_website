@@ -2401,6 +2401,18 @@ input, select, textarea {
 				height: 4.5em;
 			}
 
+		.sidegif {
+			float: right;
+			padding: 0 0 1em 1.5em;
+		}
+
+			.sidegif img.progression-gif {
+				display: block;
+				max-height: 400px;
+				width: auto;
+				max-width: 100%;
+			}
+
 /* Table */
 
 	.table-wrapper {
