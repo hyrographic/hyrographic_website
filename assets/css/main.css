@@ -163,7 +163,7 @@ input, select, textarea {
 	}
 
 	p {
-		margin: 0 0 2em 0;
+		margin: 0 0 0.75em 0;
 	}
 
 	h1 {
@@ -2753,11 +2753,11 @@ input, select, textarea {
 				background-color: #76AEBE;
 			}
 			
-			.tiles article.style1 {
+			.tiles article {
 				margin-bottom: 1em;
 			}
 
-			.tiles article.style1 > .image {
+			.tiles article > .image {
 				height: 16em;
 			}
 
@@ -2767,20 +2767,20 @@ input, select, textarea {
 				object-fit: cover;
 			} */
 
-			.tiles article.style1 > a img.tile-icon {
+			.tiles article > a img.tile-icon {
 				height: 3em;
 				width: auto;
 				max-width: 100%;
 			}
-			
-			.tiles article.style1 > a img.tile-icon-small {
+
+			.tiles article > a img.tile-icon-small {
 				height: 1.5em;
 				width: auto;
 				max-width: 100%;
 				margin-bottom: 0.5em;
 			}
 
-			.tiles article.style1 > a img.title-background {
+			.tiles article > a img.title-background {
 				position: absolute;
 				bottom: 0;
 				right: 0;
