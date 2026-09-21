@@ -55,13 +55,27 @@
 								<img class="tile-icon-small" src="images/12 BOOKS IN 12 MONTHS.png" alt="12 Books in 12 Months">
 								<img class="tile-icon" src="images/Challenge Bookmark.png" alt="12 Books in 12 Months">
 							</div>
-							<span class="sidegif"><img class="progression-gif" src="images/progression_v2-35.gif" alt="" /></span>
+
+							<!-- Product image gallery -->
+							<div class="product-gallery">
+								<div class="gallery-main">
+									<img id="gallery-main-img" src="images/bookmark_in_book_landscape.png" alt="Bookmark in book" />
+								</div>
+								<p id="gallery-caption">All bookmarks are handmade in the UK using recyclable materials.</p>
+								<div class="gallery-thumbs">
+									<img class="gallery-thumb active" src="images/bookmark_in_book_landscape.png"
+										data-caption="All bookmarks are handmade in the UK using recyclable materials." alt="Bookmark in book" />
+									<img class="gallery-thumb" src="images/progression_v2-35.gif"
+										data-caption="" alt="Progression" />
+									<!-- Add more thumbnails here:
+									<img class="gallery-thumb" src="images/YOUR_IMAGE.png"
+										data-caption="Your caption here." alt="" />
+									-->
+								</div>
+							</div>
+
 							<p>The <b>12 Books in 12 Months</b> bookmark is the first challenge bookmark I've created, which presents a simple goal of reading <b>1 book each month for a year!</b> And of course, it also works as a normal bookmark to keep track of your progress through each book.</p>
 							<p>Its simple, with each read you get the satifying reward of tearing away a tab. Watch the stack of books beneath slowly reveal itself as your reading list grows to 12 books. A great gift for new readers, or readers who need a bit of extra motivation to keep up their reading!</p>
-							</div>
-						<div>
-							<span class="image main"><img src="images/bookmark_in_book_landscape.png" alt="" /></span>
-							<p>All bookmarks are handmade in the UK using recyclable materials.</p>
 						</div>
 					</div>
 
@@ -95,7 +109,7 @@
 									<li><a href="https://github.com/hyrographic" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
 
 									<li><a href="https://makerworld.com/en/@hyrographic" class="icon solid style2 fa-cube"><span class="label">MakerWorld</span></a></li>
-									
+
 									<li><a href="mailto:hyrographic@gmail.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
 								</ul>
 							</section>
@@ -113,6 +127,16 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				$(function() {
+					$('.gallery-thumb').on('click', function() {
+						$('#gallery-main-img').attr('src', $(this).attr('src'));
+						$('#gallery-caption').text($(this).data('caption'));
+						$('.gallery-thumb').removeClass('active');
+						$(this).addClass('active');
+					});
+				});
+			</script>
 
 	</body>
 </html>
