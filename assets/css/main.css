@@ -1798,6 +1798,21 @@ input, select, textarea {
 
 	}
 
+	header p.subtitle {
+		margin: 0 0 0.25em 0;
+		font-size: 1.25em;
+		line-height: 1.5;
+		font-weight: 500;
+	}
+
+	@media screen and (max-width: 736px) {
+
+		header p.subtitle {
+			font-size: 1.1em;
+		}
+
+	}
+
 /* Icon */
 
 	.icon {
