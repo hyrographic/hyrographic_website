@@ -68,14 +68,11 @@
 									
 									<img class="gallery-thumb active" src="images/12b12m/12b12m_2_white_bckgrnd.png"
 										data-caption="" alt="Bookmark in book" />
-									<img class="gallery-thumb" src="images/12b12m/bookmark_progression.gif"
+									<img class="gallery-thumb" src="images/12b12m/bookmark_progression_thumbnail.webp"
+										data-full="images/12b12m/bookmark_progression.webp"
 										data-caption="" alt="Progression" />
 									<img class="gallery-thumb" src="images/12b12m/bookmark_in_book.png"
 										data-caption="" alt="Bookmark in book" />
-									<!-- Add more thumbnails here:
-									<img class="gallery-thumb" src="images/YOUR_IMAGE.png"
-										data-caption="Your caption here." alt="" />
-									-->
 								</div>
 							</div>
 
@@ -136,7 +133,9 @@
 			<script>
 				$(function() {
 					$('.gallery-thumb').on('click', function() {
-						$('#gallery-main-img').attr('src', $(this).attr('src'));
+						$('#gallery-main-img')
+							.attr('src', $(this).data('full') || $(this).attr('src'))
+							.attr('alt', $(this).attr('alt'));
 						$('#gallery-caption').text($(this).data('caption'));
 						$('.gallery-thumb').removeClass('active');
 						$(this).addClass('active');
