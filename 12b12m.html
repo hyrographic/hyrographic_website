@@ -62,6 +62,7 @@
 							<div class="product-gallery">
 								<div class="gallery-main">
 									<img id="gallery-main-img" src="images/12b12m/spread_with_books.png" alt="Bookmark in book" />
+									<video id="gallery-main-video" autoplay muted loop playsinline hidden></video>
 								</div>
 								<p id="gallery-caption"></p>
 								<div class="gallery-thumbs">
@@ -71,15 +72,19 @@
 										data-caption="" alt="Bookmark in book" />
 									<img class="gallery-thumb" src="images/12b12m/partial_bookmark_in_book_pattern.png"
 										data-caption="" alt="Bookmark in book" />
-									<img class="gallery-thumb" src="images/12b12m/bookmark_progression_thumbnail.webp"
-										data-full="images/12b12m/bookmark_progression.webp"
-										data-caption="" alt="Progression" />
+									<video class="gallery-thumb" muted playsinline preload="metadata"
+										src="images/12b12m/demo_with_book_muted_wm.mp4#t=0.1"
+										data-full="images/12b12m/demo_with_book_muted_wm.mp4"
+										data-caption="" aria-label="Demo video"></video>
 									<img class="gallery-thumb" src="images/12b12m/full_single_book_stack.png"
 										data-caption="" alt="Progression" />
 									<img class="gallery-thumb" src="images/12b12m/partial_single_book_stack.png"
 										data-caption="" alt="Progression" />
 									<img class="gallery-thumb" src="images/12b12m/12b12m_2_white_bckgrnd.png"
 										data-caption="" alt="Bookmark in book" />
+									<img class="gallery-thumb" src="images/12b12m/bookmark_progression_thumbnail.webp"
+										data-full="images/12b12m/bookmark_progression.webp"
+										data-caption="" alt="Progression" />
 								</div>
 							</div>
 
@@ -131,6 +136,17 @@
 
 			</div>
 
+		<!-- Gallery lightbox -->
+			<div id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+				<button class="lightbox-close" aria-label="Close">&times;</button>
+				<button class="lightbox-prev" aria-label="Previous">&#8249;</button>
+				<div class="lightbox-content">
+					<img id="lightbox-img" alt="" />
+					<video id="lightbox-video" autoplay muted loop playsinline controls hidden></video>
+				</div>
+				<button class="lightbox-next" aria-label="Next">&#8250;</button>
+			</div>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
@@ -139,13 +155,89 @@
 			<script src="assets/js/main.js"></script>
 			<script>
 				$(function() {
-					$('.gallery-thumb').on('click', function() {
-						$('#gallery-main-img')
-							.attr('src', $(this).data('full') || $(this).attr('src'))
-							.attr('alt', $(this).attr('alt'));
-						$('#gallery-caption').text($(this).data('caption'));
-						$('.gallery-thumb').removeClass('active');
-						$(this).addClass('active');
+					// Wrap video thumbs so a play icon can be overlaid on them.
+					$('video.gallery-thumb').wrap('<span class="gallery-video-wrap"></span>');
+
+					var $thumbs = $('.gallery-thumb'),
+						$mainImg = $('#gallery-main-img'),
+						mainVideo = $('#gallery-main-video')[0],
+						$lightbox = $('#gallery-lightbox'),
+						$lbImg = $('#lightbox-img'),
+						lbVideo = $('#lightbox-video')[0];
+
+					function fullSrc($thumb) {
+						return $thumb.data('full') || $thumb.attr('src');
+					}
+
+					function isVideo($thumb) {
+						return $thumb.is('video');
+					}
+
+					// Show media in either an <img> or a <video>, hiding the other.
+					function show($img, video, $thumb) {
+						if (isVideo($thumb)) {
+							$img.attr('hidden', true);
+							if (video.getAttribute('src') !== fullSrc($thumb))
+								video.src = fullSrc($thumb);
+							video.hidden = false;
+							video.play();
+						} else {
+							video.pause();
+							video.hidden = true;
+							$img.attr('src', fullSrc($thumb))
+								.attr('alt', $thumb.attr('alt'))
+								.removeAttr('hidden');
+						}
+					}
+
+					function select(index) {
+						var $thumb = $thumbs.eq((index + $thumbs.length) % $thumbs.length);
+						show($mainImg, mainVideo, $thumb);
+						$('#gallery-caption').text($thumb.data('caption'));
+						$thumbs.removeClass('active');
+						$thumb.addClass('active');
+						if ($lightbox.hasClass('visible')) {
+							mainVideo.pause();
+							show($lbImg, lbVideo, $thumb);
+						}
+					}
+
+					function currentIndex() {
+						return $thumbs.index($thumbs.filter('.active'));
+					}
+
+					function openLightbox() {
+						$lightbox.addClass('visible');
+						$('body').css('overflow', 'hidden');
+						select(currentIndex());
+					}
+
+					function closeLightbox() {
+						$lightbox.removeClass('visible');
+						$('body').css('overflow', '');
+						lbVideo.pause();
+						if (isVideo($thumbs.filter('.active'))) mainVideo.play();
+					}
+
+					$thumbs.on('click', function() {
+						select($thumbs.index(this));
+					});
+
+					$('.gallery-main').on('click', openLightbox);
+					$lightbox.find('.lightbox-close').on('click', closeLightbox);
+					$lightbox.find('.lightbox-prev').on('click', function() { select(currentIndex() - 1); });
+					$lightbox.find('.lightbox-next').on('click', function() { select(currentIndex() + 1); });
+
+					// Close when clicking the backdrop (but not the media itself).
+					$lightbox.on('click', function(e) {
+						if (e.target === this || $(e.target).hasClass('lightbox-content')) closeLightbox();
+					});
+
+					$(document).on('keydown', function(e) {
+						if (!$lightbox.hasClass('visible')) return;
+						if (e.key === 'Escape') closeLightbox();
+						else if (e.key === 'ArrowLeft') select(currentIndex() - 1);
+						else if (e.key === 'ArrowRight') select(currentIndex() + 1);
 					});
 				});
 			</script>
