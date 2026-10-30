@@ -2520,6 +2520,39 @@ input, select, textarea {
 					border-color: transparent transparent transparent #fff;
 				}
 
+		/* Product info: description text plus the buy button.
+		   Desktop: button below the text, centered. Mobile: button above the text. */
+
+		.product-info {
+			display: flex;
+			flex-direction: column;
+		}
+
+			.product-info .buy-actions {
+				justify-content: center;
+			}
+
+			@media screen and (max-width: 736px) {
+
+				.product-info .buy-actions {
+					order: -1;
+					justify-content: flex-start;
+				}
+
+			}
+
+			/* Buy button: yellow by default, grey on hover (reverse of the theme's primary button). */
+			.button.primary.buy-button {
+				background-color: #F2B50B;
+				font-family: "Source Sans Pro", Helvetica, sans-serif;
+				letter-spacing: 0.15em;
+			}
+
+				.button.primary.buy-button:hover {
+					background-color: #b0b0b0;
+					color: #181818 !important;
+				}
+
 		/* Gallery lightbox */
 
 		#gallery-lightbox {
