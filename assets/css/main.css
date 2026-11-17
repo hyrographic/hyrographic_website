@@ -2416,6 +2416,11 @@ input, select, textarea {
 				height: 4.5em;
 			}
 
+			.title-images img.tile-icon.car-posters {
+				height: 7em;
+				object-fit: contain;
+			}
+
 		#main > .inner {
 			display: flow-root;
 		}
@@ -3010,7 +3015,8 @@ input, select, textarea {
 					}
 
 			.tiles article.style1 > .image:before {
-				background-color: #76AEBE;
+				background-color: #718093;
+				opacity: 0.5;
 			}
 			
 			.tiles article {
@@ -3031,6 +3037,11 @@ input, select, textarea {
 				height: 3em;
 				width: auto;
 				max-width: 100%;
+			}
+
+			.tiles article > a img.tile-icon.car-posters {
+				height: 6em;
+				object-fit: contain;
 			}
 
 			.tiles article > a img.tile-icon-small {
@@ -3079,7 +3090,8 @@ input, select, textarea {
 				}
 
 			.tiles article.style2 > .image:before {
-				background-color: #7ecaf6;
+				background-color: #353b48;
+				opacity: 0.35;
 			}
 
 			.tiles article.style3 > .image:before {
