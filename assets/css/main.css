@@ -2987,6 +2987,12 @@ input, select, textarea {
 					margin: 0;
 				}
 
+				.tiles article > a .tile-title-car-posters {
+					font-family: "Source Sans Pro", Helvetica, sans-serif; 
+					font-size: 2em;
+					letter-spacing: 0.15em;
+				}
+
 				.tiles article > a .content {
 					-moz-transition: max-height 0.5s ease, opacity 0.5s ease;
 					-webkit-transition: max-height 0.5s ease, opacity 0.5s ease;
@@ -3040,13 +3046,37 @@ input, select, textarea {
 				right: 0;
 				width: 100%;
 				height: auto;
-				transform: translateY(39%) translateX(20%) rotate(15deg) scale(0.35);
+				/* Per-card values: override these in the card classes below. */
+				--bg-x: 20%;
+				--bg-y: 39%;
+				--bg-rotate: 15deg;
+				--bg-scale: 0.35;
+				--bg-scale-hover: 0.40;
+				transform: translateY(var(--bg-y)) translateX(var(--bg-x)) rotate(var(--bg-rotate)) scale(var(--bg-scale));
 				-webkit-transition: -webkit-transform 0.5s ease;
 				transition: transform 0.5s ease;
 				opacity: 1;
 				z-index: -1;
 				pointer-events: none;
 			}
+
+				/* Challenge Bookmarks card */
+				.tiles article > a img.title-background.bg-bookmarks {
+					--bg-x: 20%;
+					--bg-y: 39%;
+					--bg-rotate: 15deg;
+					--bg-scale: 0.35;
+					--bg-scale-hover: 0.40;
+				}
+
+				/* Car Posters card */
+				.tiles article > a img.title-background.bg-car-posters {
+					--bg-x: 0%;
+					--bg-y: 5%;
+					--bg-rotate: 0deg;
+					--bg-scale: 1;
+					--bg-scale-hover: 1.1;
+				}
 
 			.tiles article.style2 > .image:before {
 				background-color: #7ecaf6;
@@ -3095,7 +3125,7 @@ input, select, textarea {
 			}
 
 			body:not(.is-touch) .tiles article:hover > a img.title-background {
-				transform: translateY(39%) translateX(20%) rotate(15deg) scale(0.40);
+				transform: translateY(var(--bg-y)) translateX(var(--bg-x)) rotate(var(--bg-rotate)) scale(var(--bg-scale-hover));
 			}
 
 		* + .tiles {
